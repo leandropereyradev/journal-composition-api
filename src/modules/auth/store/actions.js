@@ -16,11 +16,11 @@ export const createUser = async ({ commit }, user) => {
 
     const { idToken, refreshToken } = data;
 
-    const resp = await authAPI.post(":update", { displayName: name, idToken });
+    await authAPI.post(":update", { displayName: name, idToken });
 
-    console.log(resp);
+    delete user.password;
 
-    // console.log(data);
+    commit("registerUser", { user, idToken, refreshToken });
 
     return { ok: true };
   } catch (error) {
