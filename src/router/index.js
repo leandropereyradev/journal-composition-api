@@ -3,6 +3,7 @@ import HomeView from "../views/Home.vue";
 
 import daybookRouter from "../modules/daybook/router";
 import authRouter from "../modules/auth/router";
+import isAuthenticatedGuard from "@/modules/auth/router/auth-guard";
 
 const routes = [
   {
@@ -19,6 +20,7 @@ const routes = [
 
   //Daybook Routes
   {
+    beforeEnter: [isAuthenticatedGuard],
     ...daybookRouter,
   },
 
