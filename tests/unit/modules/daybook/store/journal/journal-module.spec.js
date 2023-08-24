@@ -15,7 +15,7 @@ describe("Vuex - Journal Module testing", () => {
 
   // State
   test("Debería tener este state", () => {
-    const store = createVuexStore(journalState);
+    const store = createVuexStore();
     const { isLoading, entries } = store.state.journal;
 
     expect(isLoading).toBeFalsy();
@@ -24,7 +24,7 @@ describe("Vuex - Journal Module testing", () => {
 
   // Mutations ==================
   test("Mutation: setEntries", () => {
-    const store = createVuexStore({ isLoading: true, entries: [] });
+    const store = createVuexStore(null, { isLoading: true, entries: [] });
 
     store.commit("journal/setEntries", journalState.entries);
     expect(store.state.journal.entries.length).toBe(2);
@@ -37,7 +37,7 @@ describe("Vuex - Journal Module testing", () => {
   });
 
   test("Mutation: updateEntry", () => {
-    const store = createVuexStore(journalState);
+    const store = createVuexStore();
     const updatedEntry = {
       id: "-NcDajnqii52q08YUU6l",
       date: 1627077227978,
@@ -55,7 +55,7 @@ describe("Vuex - Journal Module testing", () => {
   });
 
   test("Mutation: addEntry and deleteEntry", () => {
-    const store = createVuexStore(journalState);
+    const store = createVuexStore();
 
     store.commit("journal/addEntry", { id: "ABC-123", text: "Hola Mundo" });
 
@@ -73,7 +73,7 @@ describe("Vuex - Journal Module testing", () => {
 
   // Getters ==================
   test("Getters: getEntriesByTerm and getEntryById", () => {
-    const store = createVuexStore(journalState);
+    const store = createVuexStore();
 
     const [entry1, entry2] = journalState.entries;
 
@@ -94,7 +94,7 @@ describe("Vuex - Journal Module testing", () => {
 
   // Actions ==================
   test("Actions: loadEntries", async () => {
-    const store = createVuexStore({ isLoading: true, entries: [] });
+    const store = createVuexStore(null, { isLoading: true, entries: [] });
 
     await store.dispatch("journal/loadEntries");
 
@@ -102,7 +102,7 @@ describe("Vuex - Journal Module testing", () => {
   });
 
   test("Actions: updateEntry", async () => {
-    const store = createVuexStore(journalState);
+    const store = createVuexStore();
 
     const updatedEntry = {
       id: "-NcDajnqii52q08YUU6l",
@@ -126,7 +126,7 @@ describe("Vuex - Journal Module testing", () => {
   });
 
   test("Actions: createEntry and deleteEntry", async () => {
-    const store = createVuexStore(journalState);
+    const store = createVuexStore();
 
     const newEntry = {
       date: 1627077227978,

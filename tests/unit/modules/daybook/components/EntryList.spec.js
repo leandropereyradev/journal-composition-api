@@ -2,12 +2,11 @@ import { shallowMount } from "@vue/test-utils";
 
 import EntryList from "@/modules/daybook/components/EntryList.vue";
 
-import { journalState } from "../../../mocks/test-journal-state";
 import createVuexStore from "../../../mocks/createVuexStore";
 import mockRouter from "../../..//mocks/mockRouter";
 
 describe("EntryList component", () => {
-  const store = createVuexStore(journalState);
+  const store = createVuexStore();
 
   let wrapper;
 

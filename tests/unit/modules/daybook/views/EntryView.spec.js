@@ -2,7 +2,6 @@ import { shallowMount } from "@vue/test-utils";
 
 import Swal from "sweetalert2";
 
-import { journalState } from "../../../mocks/test-journal-state";
 import mockRouter from "../../../mocks/mockRouter";
 import createVuexStore from "../../../mocks/createVuexStore";
 
@@ -14,7 +13,7 @@ jest.mock("sweetalert2", () => ({
 }));
 
 describe("EntryView", () => {
-  const store = createVuexStore(journalState);
+  const store = createVuexStore();
   store.dispatch = jest.fn();
 
   let wrapper;

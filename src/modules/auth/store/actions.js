@@ -22,7 +22,7 @@ export const createUser = async ({ commit }, user) => {
 
     return { ok: true };
   } catch (error) {
-    console.log(error.response);
+    // console.log(error.response);
     return { ok: false, message: error.response.data.error.message };
   }
 };
