@@ -21,3 +21,7 @@ export const deleteEntry = (state, id) => {
 
   state.entries = filter;
 };
+
+export const clearEntries = (state) => {
+  state.entries = [];
+};
