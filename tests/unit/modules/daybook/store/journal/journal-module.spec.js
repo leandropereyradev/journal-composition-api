@@ -1,7 +1,18 @@
 import { journalState } from "../../../../mocks/test-journal-state";
 import createVuexStore from "../../../../mocks/createVuexStore";
+import authAPI from "@/api/authAPI";
 
 describe("Vuex - Journal Module testing", () => {
+  beforeAll(async () => {
+    const { data } = await authAPI.post(":signInWithPassword", {
+      email: "test@test.com",
+      password: "123456",
+      returnSecureToken: true,
+    });
+
+    localStorage.setItem("idToken", data.idToken);
+  });
+
   // State
   test("Debería tener este state", () => {
     const store = createVuexStore(journalState);
