@@ -42,10 +42,38 @@ export const signInUser = async ({ commit }, user) => {
     user.name = displayName;
 
     //Usamos registerUser porque es lo mismo
-    commit("loginUser", { user, idToken, refreshToken });
+    commit("registerUser", { user, idToken, refreshToken });
 
     return { ok: true };
   } catch (error) {
+    return { ok: false, message: error.response.data.error.message };
+  }
+};
+
+export const checkAuthentication = async ({ commit }) => {
+  const idToken = localStorage.getItem("idToken");
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  if (!idToken) {
+    commit("logout");
+    return { ok: false, message: "No hay token" };
+  }
+
+  try {
+    const { data } = await authAPI.post(":lookup", { idToken });
+
+    const { displayName, email } = data.users[0];
+
+    const user = {
+      name: displayName,
+      email,
+    };
+
+    commit("registerUser", { user, idToken, refreshToken });
+
+    return { ok: true };
+  } catch (error) {
+    commit("logout");
     return { ok: false, message: error.response.data.error.message };
   }
 };
